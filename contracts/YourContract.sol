@@ -21,10 +21,11 @@ contract YourContract is ERC721, VRFConsumerBase {
 
     // Character properties
     struct Character {
-        uint256 strength;
-        uint256 luck;
-        uint256 speed;
-        string name;
+        // uint256 strength;
+        // uint256 luck;
+        // uint256 speed;
+        // string name;
+        uint256 dna;
     }
 
     // Array of Characters for storing new characters minted
@@ -72,13 +73,12 @@ contract YourContract is ERC721, VRFConsumerBase {
     {
         console.log(randomNumber);
         uint256 newId = characters.length;
-        uint256 strength = (randomNumber % 100);
-        uint256 luck = (((randomNumber) % 10000) / 100);
-        uint256 speed = ((randomNumber % 10) * 82);
+        // uint256 strength = (randomNumber % 100);
+        // uint256 luck = (((randomNumber) % 10000) / 100);
+        // uint256 speed = ((randomNumber % 10) * 82);
+        uint256 dna = randomNumber;
 
-        characters.push(
-            Character(strength, luck, speed, requestToCharacterName[requestId])
-        );
+        characters.push(Character(dna));
 
         _safeMint(requestToSender[requestId], newId);
     }
