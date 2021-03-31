@@ -1,5 +1,7 @@
 pragma solidity ^0.6.6;
 
+pragma experimental ABIEncoderV2;
+
 // This contract is deployed on Kovan and addresses are hardcoded
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -34,6 +36,8 @@ contract YourContract is ERC721, VRFConsumerBase {
     mapping(bytes32 => string) requestToCharacterName;
     mapping(bytes32 => address) requestToSender;
     mapping(bytes32 => uint256) requestToTokenId;
+
+    mapping(address => string[]) public ownerTokens;
 
     // The contructor inherits ERC721 and VRFConsumer. VRFConsumerBase (VRF Coordinator, LINK Token)
     constructor()
@@ -89,6 +93,16 @@ contract YourContract is ERC721, VRFConsumerBase {
             "Function caller not owner // Approved"
         );
 
+        ownerTokens[msg.sender].push(_tokenURI);
+
         _setTokenURI(tokenId, _tokenURI);
+    }
+
+    function retrieveTokens(address _adr)
+        public
+        view
+        returns (string[] memory)
+    {
+        return ownerTokens[_adr];
     }
 }
