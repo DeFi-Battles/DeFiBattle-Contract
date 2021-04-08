@@ -39,6 +39,9 @@ contract YourContract is ERC721, VRFConsumerBase {
 
     mapping(address => string[]) public ownerTokens;
 
+    event RequestId(bytes32 requestId);
+    event CharacterEvent(bytes32 requestId, uint256 dna, uint256 tokenId);
+
     // The contructor inherits ERC721 and VRFConsumer. VRFConsumerBase (VRF Coordinator, LINK Token)
     constructor()
         public
@@ -65,6 +68,8 @@ contract YourContract is ERC721, VRFConsumerBase {
         // Maps address calling the function to requestId
         requestToSender[requestId] = msg.sender;
 
+        emit RequestId(requestId);
+
         // console.log(requestId);
         return requestId;
     }
@@ -83,6 +88,8 @@ contract YourContract is ERC721, VRFConsumerBase {
         uint256 dna = randomNumber;
 
         characters.push(Character(dna));
+
+        emit CharacterEvent(requestId, dna, newId);
 
         _safeMint(requestToSender[requestId], newId);
     }
