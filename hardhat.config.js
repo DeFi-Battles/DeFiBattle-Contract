@@ -1,12 +1,12 @@
 require("@nomiclabs/hardhat-waffle");
 
-const INFURA_ENDPOINT = "https://rinkeby.infura.io/v3/162408c0fa52425fa3252add6d3820d7";
+const INFURA_ENDPOINT = "";
 
 // Replace this private key with your Ropsten account private key
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const RINKEBY_PRIVATE_KEY = "d8d2c0e36f79c02788d3712dd62ffe9aae965d2502b85694a62a95be807f3803";
+const RINKEBY_PRIVATE_KEY = "";
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
